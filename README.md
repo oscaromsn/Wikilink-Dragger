@@ -11,7 +11,7 @@ A simple plugin that adds a draggable link icon to note headers in [Obsidian](ht
 - Visual feedback when dragging
 - Maintains the standard note dragging functionality
 
-## Installation (WIP, not read for public release yet, install via BRAT if you know what you are doing #buildinpublic)
+## Installation (WIP, not ready for public release yet, install via BRAT if you know what you are doing #buildinpublic)
 
 You can install the plugin via the Community Plugins tab within Obsidian:
 
