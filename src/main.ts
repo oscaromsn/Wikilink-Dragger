@@ -1,5 +1,6 @@
 import { around } from 'monkey-around';
 import { App, ItemView, Plugin, PluginSettingTab, setIcon, Setting, setTooltip, View } from 'obsidian';
+import { EditorView } from '@codemirror/view';
 
 interface DragWikilinkSettings {
     enabled: boolean;
@@ -14,6 +15,31 @@ export default class DragWikilinkPlugin extends Plugin {
 
     async onload() {
         await this.loadSettings();
+
+        // Register editor extension to handle wikilink drops
+        this.registerEditorExtension([
+            EditorView.domEventHandlers({
+                drop: (event: DragEvent, view: EditorView) => {
+                    const text = event.dataTransfer?.getData("text/plain");
+                    if (text?.endsWith("]] ")) {
+                        // Prevent default drop behavior
+                        event.preventDefault();
+                        
+                        // Get drop position from editor coordinates
+                        const pos = view.posAtCoords({x: event.clientX, y: event.clientY});
+                        if (pos) {
+                            // Insert text and move cursor after it
+                            view.dispatch({
+                                changes: {from: pos, insert: text},
+                                selection: {anchor: pos + text.length}
+                            });
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            })
+        ]);
 
         // Add the draggable link icon to view headers
         this.register(around(ItemView.prototype, {
@@ -34,7 +60,8 @@ export default class DragWikilinkPlugin extends Plugin {
                         linkEl.addEventListener("dragstart", e => {
                             // Set drag data for the link
                             if (this.file) {
-                                e.dataTransfer.setData("text/plain", `[[${this.file.path}]]`)
+                                // Add a space after the wikilink
+                                e.dataTransfer.setData("text/plain", `[[${this.file.path}]] `)
                                 e.dataTransfer.effectAllowed = "copy"
                             }
                         })
