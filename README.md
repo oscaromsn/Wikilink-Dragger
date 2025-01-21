@@ -1,94 +1,76 @@
-# Obsidian Sample Plugin
+# Obsidian Drag Wikilink
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+> ⚠️ **Beta Version**: This plugin is currently in beta. After enabling it, please reload your Obsidian window for the plugin to work properly.
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+A simple plugin that adds a draggable link icon to note headers in [Obsidian](https://obsidian.md), making it easier to create wikilinks by dragging and dropping.
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+## Features
 
-## First time developing plugins?
+- Adds a draggable link icon next to the default note icon in headers
+- Create wikilinks by dragging the link icon to any editor
+- Visual feedback when dragging
+- Maintains the standard note dragging functionality
 
-Quick starting guide for new plugin devs:
+## Installation (WIP, not read for public release yet, install via BRAT if you know what you are doing #buildinpublic)
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+You can install the plugin via the Community Plugins tab within Obsidian:
 
-## Releasing new releases
+1. Open Settings in Obsidian
+2. Navigate to Community Plugins and disable Safe Mode
+3. Click Browse and search for "Drag Wikilink"
+4. Click Install
+5. Enable the plugin in the Community Plugins tab
+6. **Important**: Reload your Obsidian window (Ctrl/Cmd + R)
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+## Usage
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+1. Enable the plugin
+2. **Reload Obsidian** for changes to take effect
+3. You'll see a new link icon (🔗) next to the default note icon in headers
+4. To create a wikilink:
+   - Click and drag the link icon to any editor
+   - Release to insert a wikilink to that note
 
-## Adding your plugin to the community plugin list
+## Manual Installation
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+1. Download the latest release from the releases page
+2. Extract the zip file into your vault's `.obsidian/plugins/` directory
+3. Enable the plugin in Obsidian's Community Plugins settings
+4. **Reload Obsidian**
 
-## How to use
+## For Developers
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+This plugin is built using:
 
-## Manually installing the plugin
+- TypeScript
+- Obsidian API
+- `monkey-around` for view modifications
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+To build:
 
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
+```bash
+# Clone this repository
+git clone https://github.com/yourusername/obsidian-drag-wikilink
 
-## Funding URL
+# Install dependencies
+npm install
 
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
+# Build
+npm run build
 ```
 
-If you have multiple URLs, you can also do:
+## Known Issues
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
+- The plugin requires a window reload after enabling to work properly
+- Currently in beta testing - please report any issues you encounter and provide feedback :)
 
-## API Documentation
+## Support
 
-See https://github.com/obsidianmd/obsidian-api
+If you encounter any issues or have suggestions:
+
+1. Check the known issues above
+2. If your issue isn't listed, please open an issue on GitHub
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
