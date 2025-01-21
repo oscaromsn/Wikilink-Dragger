@@ -1,8 +1,17 @@
-/*
+.clickable-icon.view-header-link-icon {
+  display: flex;
+  padding: var(--size-2-2);
+  margin-right: var(--size-2-3);
+  color: var(--text-muted);
+  align-self: center;
+  cursor: grab;
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.clickable-icon.view-header-link-icon:active {
+  cursor: grabbing;
+}
 
-If your plugin does not need CSS, delete this file.
-
-*/
+/* Ensure proper icon spacing in header */
+.view-header .view-header-icon + .view-header-link-icon {
+  margin-left: 2px;
+}

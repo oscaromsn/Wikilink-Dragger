@@ -1,5 +1,5 @@
 import { around } from 'monkey-around';
-import { App, ItemView, Plugin, PluginSettingTab, setIcon, setTooltip, View } from 'obsidian';
+import { App, ItemView, Plugin, PluginSettingTab, setIcon, Setting, setTooltip, View } from 'obsidian';
 
 interface DragWikilinkSettings {
     enabled: boolean;
