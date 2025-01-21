@@ -50,7 +50,7 @@ To build:
 
 ```bash
 # Clone this repository
-git clone https://github.com/yourusername/obsidian-drag-wikilink
+git clone https://github.com/oscaromsn/Wikilink-Dragger.git
 
 # Install dependencies
 npm install
