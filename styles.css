@@ -1,17 +1,22 @@
 .clickable-icon.view-header-link-icon {
-  display: flex;
-  padding: var(--size-2-2);
-  margin-right: var(--size-2-3);
-  color: var(--text-muted);
-  align-self: center;
-  cursor: grab;
+    display: flex;
+    padding: var(--size-2-2);
+    color: var(--text-muted);
+    align-self: center;
+    cursor: grab;
+    margin: 0 var(--size-2-2);
 }
 
 .clickable-icon.view-header-link-icon:active {
-  cursor: grabbing;
+    cursor: grabbing;
 }
 
-/* Ensure proper icon spacing in header */
-.view-header .view-header-icon + .view-header-link-icon {
-  margin-left: 2px;
+/* Ensure proper spacing between title and link icon */
+.view-header-title-container + .view-header-link-icon {
+    margin-left: var(--size-4-2);
+}
+
+/* Maintain view-actions alignment */
+.view-header .view-actions {
+    margin-left: var(--size-2-2);
 }

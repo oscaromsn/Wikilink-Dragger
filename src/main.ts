@@ -46,28 +46,35 @@ export default class DragWikilinkPlugin extends Plugin {
             load(old) {
                 return function(this: View) {
                     if (!this.iconEl) {
-                        const iconEl = this.iconEl = this.headerEl.createDiv("clickable-icon view-header-icon")
-                        // Add our new wiki-link drag icon after the main icon
-                        const linkEl = this.headerEl.createDiv("clickable-icon view-header-link-icon")
-                        setIcon(linkEl, "link")
-                        setTooltip(linkEl, "Drag to create link")
+                        const iconEl = this.iconEl = this.headerEl.createDiv("clickable-icon view-header-icon");
+                        // Create link icon with proper class
+                        const linkEl = this.headerEl.createDiv("clickable-icon view-header-link-icon");
+                        setIcon(linkEl, "link");
+                        setTooltip(linkEl, "Drag to create link");
 
-                        this.headerEl.prepend(iconEl)
-                        iconEl.draggable = true
-                        linkEl.draggable = true
+                        // Position main icon at the start
+                        this.headerEl.prepend(iconEl);
+                        
+                        // Find title container and insert link icon after it
+                        const titleContainer = this.headerEl.querySelector('.view-header-title-container');
+                        if (titleContainer) {
+                            titleContainer.after(linkEl);
+                        }
 
-                        iconEl.addEventListener("dragstart", e => { this.app.workspace.onDragLeaf(e, this.leaf) })
+                        // Set up drag functionality
+                        iconEl.draggable = true;
+                        linkEl.draggable = true;
+
+                        iconEl.addEventListener("dragstart", e => { this.app.workspace.onDragLeaf(e, this.leaf) });
                         linkEl.addEventListener("dragstart", e => {
-                            // Set drag data for the link
                             if (this.file) {
-                                // Add a space after the wikilink
-                                e.dataTransfer.setData("text/plain", `[[${this.file.path}]] `)
-                                e.dataTransfer.effectAllowed = "copy"
+                                e.dataTransfer.setData("text/plain", `[[${this.file.path}]] `);
+                                e.dataTransfer.effectAllowed = "copy";
                             }
-                        })
+                        });
 
-                        setIcon(iconEl, this.getIcon())
-                        setTooltip(iconEl, "Drag to rearrange")
+                        setIcon(iconEl, this.getIcon());
+                        setTooltip(iconEl, "Drag to rearrange");
                     }
                     return old.call(this)
                 }
