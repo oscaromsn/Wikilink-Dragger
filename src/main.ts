@@ -1,6 +1,6 @@
+import { EditorView } from '@codemirror/view';
 import { around } from 'monkey-around';
 import { App, ItemView, Plugin, PluginSettingTab, setIcon, Setting, setTooltip, View } from 'obsidian';
-import { EditorView } from '@codemirror/view';
 
 interface DragWikilinkSettings {
     enabled: boolean;
@@ -24,7 +24,7 @@ export default class DragWikilinkPlugin extends Plugin {
                     if (text?.endsWith("]] ")) {
                         // Prevent default drop behavior
                         event.preventDefault();
-                        
+
                         // Get drop position from editor coordinates
                         const pos = view.posAtCoords({x: event.clientX, y: event.clientY});
                         if (pos) {
@@ -54,7 +54,7 @@ export default class DragWikilinkPlugin extends Plugin {
 
                         // Position main icon at the start
                         this.headerEl.prepend(iconEl);
-                        
+
                         // Find title container and insert link icon after it
                         const titleContainer = this.headerEl.querySelector('.view-header-title-container');
                         if (titleContainer) {
